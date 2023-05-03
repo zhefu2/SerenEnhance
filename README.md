@@ -9,10 +9,7 @@ This is our implementation for the SIGIR 2023 paper:
  ## Files
 
 - Data. Training and testing data.
-    - yelp.train.rating. Rating of training data.
-    - yelp.test.rating. Rating of testing data.
-    - yelp.test.negative. 1000 testing samples for each user. (0,32) means this row is for user 0 and the positive test item is 32.
-- Dataset.py. Module preprocessing data.
+- Unexpectedness generation.py. Calculating unexpectedness score for each user-item pair.
 - SerenEnhance.py: Our proposed model.
 
 ## Environment Settings
