@@ -35,7 +35,7 @@ This is our implementation for the SIGIR 2023 paper:
  
 
 ## Reference
-Fu, Z., Niu, X. and Yu, L., 2023, July. Wisdom of Crowds and Fine-Grained Learning for Serendipity Recommendations. In _Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval_ (pp. *-*).
+Fu, Z., Niu, X. and Yu, L., 2023, July. Wisdom of Crowds and Fine-Grained Learning for Serendipity Recommendations. In _Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval_ (pp. 739-748).
 
 
 ```  
@@ -43,7 +43,7 @@ Fu, Z., Niu, X. and Yu, L., 2023, July. Wisdom of Crowds and Fine-Grained Learni
   author    = {Fu, Zhe and Niu, Xi(Sunshine) and Yu, Li},
   title     = {Wisdom of Crowds and Fine-Grained Learning for Serendipity Recommendations},
   booktitle = {Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval},
-  pages     = {*--*},
+  pages     = {739--748},
   publisher = {{ACM}},
   year      = {2023}
 }
