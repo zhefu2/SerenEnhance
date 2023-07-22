@@ -9,7 +9,7 @@ This is our implementation for the SIGIR 2023 paper:
  ## Files
 
 - Data: Training and testing data.
-- Unexpectedness generation.py: Calculating unexpectedness score for each user-item pair.
+- Unexpectedness_generation.py: Calculating unexpectedness score for each user-item pair.
 - SerenEnhance.py: Our proposed model.
 
 ## Environment Settings
