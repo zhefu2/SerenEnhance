@@ -18,16 +18,12 @@ This is our implementation for the SIGIR 2023 paper:
  
 ## Quick Start
 
-1. Pre-calculate the items' unexpectedness scores for each user
+1. Pre-calculate the items' unexpectedness scores for each user and generate the unexpectedness training set
     ```
-    python unexpectedness generation.py
-    ```
-2. Prepare the relevance training set and unexpectedness training set
-    ```
-    python training_data.py
+    python Unexpectedness generation.py
     ```
     
-3. Train the SerernEnhance model
+2. Train the SerernEnhance model
     ```
     python SerenEnhance.py
     ```
