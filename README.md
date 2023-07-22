@@ -20,8 +20,7 @@ This is our implementation for the SIGIR 2023 paper:
 
 1. Pre-calculate the items' unexpectedness scores for each user
     ```
-    cd Data
-    gunzip *
+    python unexpectedness generation.py
     ```
 2. Prepare the relevance training set and unexpectedness training set
     ```
