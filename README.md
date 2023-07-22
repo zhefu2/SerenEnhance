@@ -6,7 +6,7 @@ This is our implementation for the SIGIR 2023 paper:
 
 **Dataset:**  
 1. _SerenLens_ [[link]](https://github.com/zhefu2/SerenLens), a large ground truth dataset on serendipity-oriented recommendation.
-2. Amazon Review Data. [[link]](https://cseweb.ucsd.edu/~jmcauley/datasets/amazon_v2/)
+2. Amazon Review Data (Books). [[link]](https://cseweb.ucsd.edu/~jmcauley/datasets/amazon_v2/)
 
  ## Files
 
