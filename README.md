@@ -4,7 +4,7 @@ This is our implementation for the SIGIR 2023 paper:
 
 **Fu, Z., Niu, X. and Yu, L., 2023, July. Wisdom of Crowds and Fine-Grained Learning for Serendipity Recommendations. In _Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval_ (pp. 739-748).** [[Paper]](https://dl.acm.org/doi/10.1145/3539618.3591787)
 
-**Dataset:**  _SerenLens_ [[link]](https://github.com/zhefu2/SerenLens), a large ground truth dataset on serendipity-oriented recommendation.
+**Dataset:**  1. _SerenLens_ [[link]](https://github.com/zhefu2/SerenLens), a large ground truth dataset on serendipity-oriented recommendation. 2. Amazon Review Data [[link]](https://cseweb.ucsd.edu/~jmcauley/datasets/amazon_v2/)
 
  ## Files
 
