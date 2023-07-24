@@ -211,9 +211,9 @@ class MyModel(Model):
     n_reviews = 20
     dim = 128 # dimension for clusters/items/preferences
 
-    self.d1 = layers.Dense(dim, activation='relu')
-    self.d2 = layers.Dense(dim,activation='relu')
-    self.d3 = layers.Dense(dim,activation='relu')
+    self.d1 = layers.Dense(dim, activation='relu', kernel_regularizer=tf.keras.regularizers.L2(0.001))
+    self.d2 = layers.Dense(dim,activation='relu', kernel_regularizer=tf.keras.regularizers.L2(0.001))
+    self.d3 = layers.Dense(dim,activation='relu', kernel_regularizer=tf.keras.regularizers.L2(0.001))
 
     self.embedding_layer = TokenAndPositionEmbedding(n_reviews, embed_dim)
     self.transformer_block1 = TransformerBlock(embed_dim, n_heads, ff_dim)
