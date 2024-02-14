@@ -292,9 +292,6 @@ optimizer = tf.keras.optimizers.Adam(learning_rate=0.0001)
 train_loss = tf.keras.metrics.Mean(name='train_loss')
 
 test_loss = tf.keras.metrics.Mean(name='test_loss')
-test_accuracy_1 = tf.keras.metrics.TopKCategoricalAccuracy(k=1, name='test_accuracy1')
-test_accuracy_5 = tf.keras.metrics.TopKCategoricalAccuracy(k=5, name='test_accuracy5')
-test_accuracy_10 = tf.keras.metrics.TopKCategoricalAccuracy(k=10, name='test_accuracy10')
 
 # serendipity prepare
 test_labels = np.zeros((sre_test.shape[0],sre_test.shape[1]))
@@ -361,11 +358,26 @@ def test_step(data_test, sre_test, sre_labels, rel_test, rel_labels, unp_test, u
   t_loss = loss_object(sre_labels, predictions)
 
   test_loss(t_loss)
-  test_accuracy_1(sre_labels, predictions)
-  test_accuracy_5(sre_labels, predictions)
-  test_accuracy_10(sre_labels, predictions)
 
   return sre_labels.tolist(), predictions.numpy().tolist()
+
+# evaluation metrics
+def hit_ratio(predictions, k):
+    topk_list = np.argsort(predictions, axis=1)[:,:k]
+    n = 0
+    for i in range(len(topk_list)):
+        if np.sort(topk_list[i])[0] == 0:
+            n = n + 1
+    hr = n/len(topk_list)
+    return hr
+
+def ndcg(sre_labels, predictions, k):
+    topk_list = np.argsort(predictions, axis=1)[:,:k]
+    pred_m = np.zeros((predictions.shape[0],predictions.shape[1]))
+    for i in range(len(topk_list)):
+        pred_m[i][topk_list[i]] = 1
+    ndcg = ndcg_score(sre_labels, pred_m, k=k)
+    return ndcg
 
 EPOCHS = 100
 
@@ -373,9 +385,6 @@ for epoch in range(EPOCHS):
   # Reset the metrics at the start of the next epoch
   train_loss.reset_states()
   test_loss.reset_states()
-  test_accuracy_1.reset_states()
-  test_accuracy_5.reset_states()
-  test_accuracy_10.reset_states()
 
   seren_truth = []
   seren_pred = []
@@ -388,17 +397,20 @@ for epoch in range(EPOCHS):
     seren_truth += test_truth
     seren_pred += test_pred
 
-  ndcg_5 = ndcg_score(seren_truth, seren_pred, k=5)
-  ndcg_10 = ndcg_score(seren_truth, seren_pred, k=10)
+  hr_1 = hit_ratio(seren_truth, seren_pred, 1)
+  hr_5 = hit_ratio(seren_truth, seren_pred, 5)
+  hr_10 = hit_ratio(seren_truth, seren_pred, 10)
+  ndcg_5 = ndcg(seren_truth, seren_pred, 5)
+  ndcg_10 = ndcge(seren_truth, seren_pred, 10)
 
 
   print(
     f'Epoch {epoch + 1}, '
     f'Loss: {train_loss.result()}, '
     f'Test Loss: {test_loss.result()}, '
-    f'Test HR@1: {test_accuracy_1.result() * 100},'
-    f'Test HR@5: {test_accuracy_5.result() * 100},'
-    f'Test HR@10: {test_accuracy_10.result() * 100},'
+    'Test HR@1: ', hr_1,
+    'Test HR@5: ', hr_5,
+    'Test HR@10: ', hr_10,
     'Test NDCG@5: ', ndcg_5,
     'Test NDCG@10: ', ndcg_10,
   )
