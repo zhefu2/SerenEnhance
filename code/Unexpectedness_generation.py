@@ -71,7 +71,7 @@ for i in range(len(item_id)):  # count occurrence of each item
 item_df['count'] = item_pop
 item_pob = []
 for i in range(len(item_pop)): # calculate the probability
-    item_pob.append(item_pop[i]/len(item_list))
+    item_pob.append(item_pop[i]/len(item_id))
 item_df['probability'] = item_pob
 item_df.to_csv('item_popularity.csv')
 
@@ -145,7 +145,7 @@ for i in range(len(user_list)):
         prob_list_temp = prob_list_temp + ps / len(user_item_seq_temp)  # calculate unexpectedness score
     
         user_unexp_df = pd.DataFrame(item_list, columns=['item_id'])
-        user_unexp_df['user_unexpectedness_score'] = -1 * math.log(prob_list_temp)
+        user_unexp_df['user_unexpectedness_score'] = -1 * np.log(prob_list_temp)
         user_unexp_df = user_unexp_df.sort_values(by="user_unexpectedness_score" , ascending=True)
 
     idx = int(len(user_unexp_df)*0.3) # first or last 30% of the data
@@ -160,8 +160,8 @@ for i in range(len(user_list)):
         i_exp = exp.iloc[rsp_exp]
         i_unp = unexp.iloc[rsp_unp]
 
-        ix_exp = item_df.loc[i_exp]['index']
-        ix_unp = item_df.loc[i_unp]['index']
+        ix_exp = item_df.loc[i_exp]['item index']
+        ix_unp = item_df.loc[i_unp]['item index']
 
         e_exp = item_embedding.loc[ix_exp].values
         e_unp = item_embedding.loc[ix_unp].values
