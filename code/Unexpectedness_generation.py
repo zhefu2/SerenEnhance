@@ -43,16 +43,16 @@ user_table['item seq']= item_seq
 # match co-occurred items for each user
 user_co_item = []
 for i in range(len(user_table)):
-  temp_co = []
-  for j in range(len(item_seq)):
-    item_current_seq = item_seq[j]
-    # merge also buy and also view
-    if item_current_seq in dic_table.index.values:
-      if type(dic_table.loc[item_current_seq]['also_buy'])!=list:
-          temp_co = temp_co + dic_table.loc[item_current_seq]['also_buy'][0] + dic_table.loc[item_current_seq]['also_view'][0]
-      else:
-          temp_co = temp_co + dic_table.loc[item_current_seq]['also_buy'] + dic_table.loc[item_current_seq]['also_view']
-  user_co_item.append(temp_co)
+    temp_co = []
+    for item_current in item_seq[i]:  # iterate over items in the current user's sequence
+        if item_current in dic_table.index:
+            ab = dic_table.loc[item_current]['also_buy']
+            av = dic_table.loc[item_current]['also_view']
+            # normalize to list
+            ab = ab if isinstance(ab, list) else []
+            av = av if isinstance(av, list) else []
+            temp_co.extend(ab + av)
+    user_co_item.append(temp_co)
 user_table['co-occurrence item'] = user_co_item
 # save the data
 user_table.to_csv('../data/co_occurrence condition.csv')
